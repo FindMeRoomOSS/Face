@@ -1,5 +1,3 @@
-// import UserSession from './session';
-
 export const APP_ACTIVATE = 'activate'; // activate connection and restore user state
 export const APP_ACTIVATED = 'started'; // activate connection and restore user state
 

@@ -1,4 +1,4 @@
-import security from '../api/security';
+import server from '../api/server';
 
 
 export const LOGIN_REQUESTED = 'login';
@@ -12,7 +12,7 @@ export const USER_OUT = 'user_out';
 
 export function initialize() {
 	return (dispatch) => {
-		let database = new security();
+		let database = new server();
 		return database
 			.activateAuth()
 			.then((authData) => {
@@ -29,7 +29,7 @@ export function initialize() {
 export function login() {
 	return (dispatch) => {
 		dispatch(loginRequested());
-		let database = new fbase();
+		let database = new server();
 		return database
 			.login()
 			.then((authData) => {
@@ -48,7 +48,7 @@ export function login() {
 export function logout() {
 	return (dispatch) => {
 		dispatch(logoutRequested());
-		let database = new fbase();
+		let database = new server();
 		return database
 			.logout()
 			.then(() => dispatch(userOut()))

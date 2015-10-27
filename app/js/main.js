@@ -15,7 +15,7 @@ import { Provider } from 'react-redux'
 import { createHistory } from 'history';
 import createHashHistory from 'history/lib/createHashHistory'
 
-// import Application from './components/Application.react';
+import Application from './components/Application';
 
 import store from './store';
 
@@ -63,15 +63,13 @@ class Root extends Component {
 		const development = true;
 		const history = development ? createHashHistory('/') : createHistory();
 
-//		return (
-//			<div>
-//				<Provider key="provider" store={store}>
-//					{() => <Application history={history} />}
-//				</Provider>
-//			</div>
-//		)
-
-		return (<div>Hello World</div>)
+		return (
+			<div>
+				<Provider key="provider" store={store}>
+					{() => <Application history={history} />}
+				</Provider>
+			</div>
+		)
 	}
 }
 
