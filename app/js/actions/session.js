@@ -1,4 +1,4 @@
-import fbase from '../api/fbase';
+import security from '../api/security';
 
 
 export const LOGIN_REQUESTED = 'login';
@@ -12,7 +12,7 @@ export const USER_OUT = 'user_out';
 
 export function initialize() {
 	return (dispatch) => {
-		let database = new fbase();
+		let database = new security();
 		return database
 			.activateAuth()
 			.then((authData) => {
