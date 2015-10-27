@@ -17,10 +17,10 @@ import createHashHistory from 'history/lib/createHashHistory'
 
 // import Application from './components/Application.react';
 
-// import store from './store';
+import store from './store';
 
-// import * as app from './actions/app';
-// import * as session from './actions/session';
+import * as app from './actions/app';
+import * as session from './actions/session';
 
 class Root extends Component {
 	constructor(props, context) {
@@ -75,8 +75,8 @@ class Root extends Component {
 	}
 }
 
-// store.dispatch(app.initialize());
-// store.dispatch(session.initialize());
+store.dispatch(app.initialize());
+store.dispatch(session.initialize());
 
 React.render(<Root />, document.getElementById('root'));
 
