@@ -5,7 +5,7 @@ const initState = {
 	status: null
 };
 
-export default function session(state = initState, action) {
+export default function reservation(state = initState, action) {
 	switch (action.type) {
 		case ROOM_REQUESTED:
 			console.log(ROOM_REQUESTED);

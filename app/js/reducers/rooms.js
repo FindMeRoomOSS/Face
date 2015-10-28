@@ -7,7 +7,7 @@ const initState = {
 	rooms: []
 };
 
-export default function session(state = initState, action) {
+export default function rooms(state = initState, action) {
 	switch (action.type) {
 		case ROOMS_QUERIED:
 			console.log(ROOMS_QUERIED);
