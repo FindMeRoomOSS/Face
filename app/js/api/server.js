@@ -64,4 +64,8 @@ export default class server {
 			}];
 		return new Promise((resolve, reject) => resolve(many));
 	}
+
+	reserveRoom(id) {
+		return new Promise((resolve, reject) => resolve(id));
+	}
 }

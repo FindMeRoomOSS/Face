@@ -7,7 +7,9 @@ import Loading from './Loading';
 
 class Home extends Component {
 	static propTypes = {
-		rooms: PropTypes.object.isRequired
+		rooms: PropTypes.object.isRequired,
+		history: PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
 	};
 
 	componentDidMount() {
@@ -22,6 +24,11 @@ class Home extends Component {
 
 	_reserveRoom = (id) => {
 		console.log('reserve room', id);
+		const { history, dispatch } = this.props;
+		const newLocation = '/confirm';
+
+		dispatch(actions.reserveRoom(id))
+			.then(() => history.pushState({}, newLocation));
 	};
 
 	render() {

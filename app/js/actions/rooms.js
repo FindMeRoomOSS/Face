@@ -4,6 +4,10 @@ export const ROOMS_QUERIED = 'rooms_queried';
 export const ROOMS_RECEIVED = 'rooms_received';
 export const ROOMS_FAILED = 'rooms_failed';
 
+export const ROOM_REQUESTED = 'room_requested';
+export const ROOM_RESERVED = 'room_reserved';
+export const ROOM_REJECTED = 'room_rejected';
+
 // complex actions
 
 export function queryRooms() {
@@ -18,6 +22,22 @@ export function queryRooms() {
 			.catch((a) => {
 				console.error('rooms', a);
 				dispatch(roomsFailed(a));
+			});
+	};
+}
+
+export function reserveRoom(id) {
+	return (dispatch) => {
+		dispatch(roomsQueried(id));
+		let database = new server();
+		return database
+			.reserveRoom(id)
+			.then(() => {
+				dispatch(roomReserved(id));
+			})
+			.catch((a) => {
+				console.error('reservation', a);
+				dispatch(roomRejected(id, a));
 			});
 	};
 }
@@ -44,4 +64,24 @@ function roomsFailed(errorMessage) {
 	};
 }
 
+function roomRequested(id) {
+	return {
+		type: ROOM_REQUESTED,
+		payload: id
+	};
+}
 
+function roomReserved(id) {
+	return {
+		type: ROOM_RESERVED,
+		payload: id
+	};
+}
+
+function roomRejected(id, error) {
+	return {
+		type: ROOM_REJECTED,
+		payload: id,
+		message: error
+	};
+}

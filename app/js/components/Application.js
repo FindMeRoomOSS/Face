@@ -8,6 +8,7 @@ import Logout from './Logout';
 import Home from './Home';
 import Protected from './Protected';
 import Loading from './Loading';
+import Confirm from './Confirm';
 
 // TODO: move routes from here and rename to Shell
 class Application extends Component {
@@ -52,6 +53,7 @@ class Application extends Component {
 				<Route path="/logout" component={Logout} />
 				<Route path="/" component={Protected} onEnter={this._requireUser} >
 					<IndexRoute component={Home} />
+					<Route path="/confirm" component={Confirm} />
 				</Route>
 			</Router>
 		);
