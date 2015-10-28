@@ -1,30 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { FloatingActionButton, FontIcon } from 'material-ui';
-import { List, ListItem } from 'material-ui';
 import * as actions from '../actions/rooms';
-
-class RoomList extends Component {
-	static propTypes = {
-		rooms: PropTypes.array.isRequired
-	};
-
-	_onTouchTap = (e) => {
-		console.log(e.currentTarget.id);
-	};
-
-	render() {
-		const { rooms } = this.props;
-
-		if (rooms.length == 0) {
-			return (<div/>);
-		}
-
-		let items =  rooms.map((item) => <ListItem id={item.id} key={item.id} onTouchTap={this._onTouchTap} >{item.name}</ListItem> );
-
-		return (<List>{items}</List>);
-	}
-}
+import RoomList from './RoomList';
+import Loading from './Loading';
 
 class Home extends Component {
 	static propTypes = {
@@ -39,7 +18,11 @@ class Home extends Component {
 	_queryRooms = () => {
 		const { dispatch } = this.props;
 		dispatch(actions.queryRooms());
-	}
+	};
+
+	_reserveRoom = (id) => {
+		console.log('reserve room', id);
+	};
 
 	render() {
 		const style = {
@@ -52,10 +35,19 @@ class Home extends Component {
 
 		const { rooms } = this.props;
 
+		let content;
+		if (rooms.statusKnown) {
+			content = <RoomList rooms={rooms.rooms} onRoomSelect={this._reserveRoom} />;
+		} else if (rooms.loading) {
+			content = <Loading />;
+		} else {
+			content = <div/>;
+		}
+
 		return (
 			<div>
 				<content>
-					<RoomList rooms={rooms.rooms} />
+					{content}
 				</content>
 
 				<buttons>
