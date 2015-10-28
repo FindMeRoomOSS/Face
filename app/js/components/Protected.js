@@ -9,10 +9,6 @@ class Protected extends Component {
 		authData: PropTypes.object.isRequired
 	};
 
-	static contextTypes = {
-		muiTheme: PropTypes.object.isRequired
-	};
-
 	_menuInitiated = (e) => {
 		e.preventDefault();
 		this.refs.leftNav.toggle();

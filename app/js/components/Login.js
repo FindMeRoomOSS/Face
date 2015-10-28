@@ -14,10 +14,6 @@ class Login extends Component {
 		authData: PropTypes.object
 	};
 
-	static contextTypes = {
-		muiTheme: PropTypes.object.isRequired
-	};
-
 	handleLogin = () => {
 
 		const { history, location, dispatch } = this.props;
