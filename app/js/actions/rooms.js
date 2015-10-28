@@ -28,7 +28,7 @@ export function queryRooms() {
 
 export function reserveRoom(id) {
 	return (dispatch) => {
-		dispatch(roomsQueried(id));
+		dispatch(roomRequested(id));
 		let database = new server();
 		return database
 			.reserveRoom(id)

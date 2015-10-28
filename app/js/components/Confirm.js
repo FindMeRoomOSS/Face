@@ -4,20 +4,19 @@ import { Paper } from 'material-ui';
 
 class Confirm extends Component {
 	static propTypes = {
-		rooms: PropTypes.object.isRequired
+		reservation: PropTypes.object.isRequired
 	};
 
 	render() {
-		const {rooms} = this.props;
-		console.log('cofirmation', rooms);
+		const {reservation} = this.props;
 
-		return (<Paper> <p>confirmation page</p></Paper>);
+		return (<Paper><p>confirmation page {reservation.status}</p></Paper>);
 	}
 }
 
 function mapStateToProps(state) {
 	return {
-		rooms: state.rooms
+		reservation: state.reservation
 	}
 }
 
