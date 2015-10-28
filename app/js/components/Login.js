@@ -43,7 +43,6 @@ class Login extends Component {
 
 		let styles = {
 			paper: {
-				backgroundColor: this.context.muiTheme.palette.primary2Color,
 				color: Typography.textFullWhite,
 				textAlign: 'center',
 				verticalAlign: 'middle',

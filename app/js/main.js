@@ -6,8 +6,8 @@ window.React = React; // to enable react productivity tools
 import injectTapEventPlugin from 'react-tap-event-plugin'; // TODO: to deal with 300ms tap delay until React 1.0.0
 injectTapEventPlugin();
 
-import { Styles } from 'material-ui';
-let ThemeManager = new Styles.ThemeManager();
+import { Colors, Spacing, ThemeManager } from 'material-ui/lib/styles'
+import { ColorManipulator } from 'material-ui/lib/utils'
 
 import { Provider } from 'react-redux'
 
@@ -22,29 +22,28 @@ import store from './store';
 import * as app from './actions/app';
 import * as session from './actions/session';
 
+// TODO: split to file
+const rawTheme = {
+	spacing: Spacing,
+	fontFamily: 'Roboto, sans-serif',
+	palette: {
+		primary1Color: Colors.cyan500,
+		primary2Color: Colors.cyan700,
+		primary3Color: Colors.lightBlack,
+		accent1Color: Colors.pinkA200,
+		accent2Color: Colors.grey100,
+		accent3Color: Colors.grey500,
+		textColor: Colors.darkBlack,
+		alternateTextColor: Colors.white,
+		canvasColor: Colors.white,
+		borderColor: Colors.grey300,
+		disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
+	},
+}
+
 class Root extends Component {
 	constructor(props, context) {
 		super(props, context);
-
-		// TODO: use Colors?
-		ThemeManager.setPalette({
-			primary1Color: '#1976D2',
-			primary2Color: '#2196F3',
-			primary3Color: '#BBDEFB',
-			accent1Color: '#FF5252',
-			textColor: '#212121'
-		});
-
-			//primary1Color: String, - AppBar
-			//primary2Color: String,
-			//primary3Color: String,
-			//accent1Color: String, - Add button
-			//accent2Color: String,
-			//accent3Color: String,
-			//textColor: String,
-			//canvasColor: String,
-			//borderColor: String,
-			//disabledColor: String
 	}
 
 	// setup Theme Manager for Material UI via React Context
@@ -55,7 +54,7 @@ class Root extends Component {
 
 	getChildContext() {
 		return {
-			muiTheme: ThemeManager.getCurrentTheme()
+			muiTheme: ThemeManager.getMuiTheme(rawTheme)
 		};
 	}
 
