@@ -9,7 +9,7 @@ const initState = {
 export default function session(state = initState, action) {
 	switch (action.type) {
 		case LOGIN_REQUESTED:
-			console.log('LOGIN_REQUESTED');
+			console.log(LOGIN_REQUESTED);
 			return {
 				statusKnown: false,
 				authData: null
@@ -17,7 +17,7 @@ export default function session(state = initState, action) {
 
 		case USER_IN:
 			let authData = action.payload.authData;
-			console.log('USER_IN', authData);
+			console.log(USER_IN, authData);
 			if (!authData) {
 				console.error('authData', authData);
 			}
@@ -27,7 +27,7 @@ export default function session(state = initState, action) {
 			};
 
 		case USER_OUT:
-			console.log('USER_OUT');
+			console.log(USER_OUT);
 			return {
 				statusKnown: true,
 				authData: null

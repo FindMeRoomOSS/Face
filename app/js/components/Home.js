@@ -1,16 +1,39 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { FloatingActionButton, FontIcon } from 'material-ui';
+import { List, ListItem } from 'material-ui';
 import * as actions from '../actions/rooms';
 
+class RoomList extends Component {
+	static propTypes = {
+		rooms: PropTypes.array.isRequired
+	};
+
+	_onTouchTap = (e) => {
+		console.log(e.currentTarget.id);
+	};
+
+	render() {
+		const { rooms } = this.props;
+
+		if (rooms.length == 0) {
+			return (<div/>);
+		}
+
+		let items =  rooms.map((item) => <ListItem id={item.id} key={item.id} onTouchTap={this._onTouchTap} >{item.name}</ListItem> );
+
+		return (<List>{items}</List>);
+	}
+}
 
 class Home extends Component {
-	//static propTypes = {
-	//	locations: PropTypes.object.isRequired
-	//};
+	static propTypes = {
+		rooms: PropTypes.object.isRequired
+	};
 
 	componentDidMount() {
 		// TODO: initialization?
+
 	}
 
 	_queryRooms = () => {
@@ -27,10 +50,14 @@ class Home extends Component {
 			}
 		};
 
-		//const { locations } = this.props;
+		const { rooms } = this.props;
 
 		return (
 			<div>
+				<content>
+					<RoomList rooms={rooms.rooms} />
+				</content>
+
 				<buttons>
 					<FloatingActionButton style={style.floating} onTouchTap={this._queryRooms} >
 						<FontIcon className="material-icons">assistant</FontIcon>
@@ -38,15 +65,14 @@ class Home extends Component {
 				</buttons>
 			</div>);
 
-		//<content>
-		//	{Object.keys(locations).map((id) => <LocationCard id={id} key={id} place={locations[id]} />)}
-		//</content>
+
 	}
 }
 
 function mapStateToProps(state) {
-	return {};
-	// 		locations: state.places
+	return {
+		rooms: state.rooms
+	}
 }
 
 export default connect(mapStateToProps)(Home);
